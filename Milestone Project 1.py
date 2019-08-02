@@ -1,0 +1,81 @@
+# Python: Tic Tac Toe Game
+# Date: 08/01/2019
+
+
+#  The Game Board
+board = [0,1,2,3,4,5,6,7,8]
+
+def game_board():
+    print( '     ', '|  ', '   ', '|  ')
+    print( ' ', board[0], '  |  ',board[1], '  |  ', board[2])
+    print('     ', '|  ', '   ', '|  ')
+    print('---------------------')
+    print('     ', '|  ', '   ', '|  ')
+    print(' ', board[3], '  |  ', board[4], '  |  ', board[5])
+    print('     ', '|  ', '   ', '|  ')
+    print('---------------------')
+    print('     ', '|  ', '   ', '|  ')
+    print(' ', board[6], '  |  ', board[7], '  |  ', board[8])
+    print('     ', '|  ', '   ', '|  ')
+print(game_board())
+
+
+#  Check for winning patterns
+
+def check_line(char, position1, position2, position3):
+    if (board[position1] == char and board[position2] == char and board[position3] == char):
+        return True
+
+def check_position(char):
+    if check_line(char, 0, 1, 2):
+        return True
+    if check_line(char, 3, 4, 5):
+        return True
+    if check_line(char, 6, 7, 8):
+        return True
+    if check_line(char, 0, 3, 6):
+        return True
+    if check_line(char, 1, 4, 7):
+        return True
+    if check_line(char, 2, 5, 8):
+        return True
+    if check_line(char, 0, 4, 8):
+        return True
+    if check_line(char, 2, 4, 6):
+        return True
+
+
+#  Player X and input function    ( Below is the Main Game)
+
+while True:
+
+    # player make his/her input
+    player_input = int(input("Input your Position: "))
+
+    # assign player pick to the board
+    if board[player_input] != 'X' and board[player_input] != 'O':
+        board[player_input] = 'X'
+
+        if check_position('X') == True:
+            print(" ~~~~~~ Player Win!!! ~~~~~")
+            break;
+
+        # Computer Moves
+        while True:
+            # this import tell computer to pick a random position on the board
+            import random
+            CPU = random.randint(0,8)
+
+            # assign computer pick to the board
+            if board[CPU] != 'O' and board[CPU] != 'X':
+                board[CPU] = 'O'
+                break;
+
+                if check_position('O') == True:
+                    print("~~~~~ Computer Win!!! ~~~~~")
+                    break;
+
+    else:
+        print('This spot is already taken!')
+
+    game_board()
